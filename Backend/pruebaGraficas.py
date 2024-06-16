@@ -8,7 +8,7 @@ import time
 import plotly.express as px
 import plotly.graph_objects as go
 from flask_cors import CORS
-app = Flask(__name__)
+app = Flask(__name__)   
 CORS(app)
 def latencias(count, url):
     try:
@@ -211,7 +211,7 @@ def run_speedtest():
     latency_box_html = fig_latency_box.to_html(full_html=False)
     max_min_avg_speeds_html = fig_max_min_avg_speeds.to_html(full_html=False)
     kpis_html = fig_kpis.to_html(full_html=False)
-
+    fig_speeds_time.write_html("figura1.html")
     response = {
         "download_hist": download_hist_html,
         "upload_hist": upload_hist_html,
