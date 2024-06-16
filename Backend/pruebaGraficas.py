@@ -187,21 +187,9 @@ def run_speedtest():
         title={"text": "Velocidad Promedio de Subida (Mbps)"},
         domain={'row': 0, 'column': 1}
     ))
-    fig_kpis.add_trace(go.Indicator(
-        mode="number",
-        value=latenciaPromedio,
-        title={"text": "Latencia Promedio (ms)"},
-        domain={'row': 1, 'column': 0}
-    ))
-    fig_kpis.add_trace(go.Indicator(
-        mode="number",
-        value=latenciaMayor,
-        title={"text": "Latencia Máxima (ms)"},
-        domain={'row': 1, 'column': 1}
-    ))
     fig_kpis.update_layout(
         title='Panel de KPIs',
-        grid={'rows': 2, 'columns': 2, 'pattern': "independent"}
+        grid={'rows': 1, 'columns': 2, 'pattern': "independent"}
     )
     
     # Convertir gráficos a HTML

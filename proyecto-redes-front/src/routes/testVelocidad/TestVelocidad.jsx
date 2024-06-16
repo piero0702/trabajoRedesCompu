@@ -50,49 +50,41 @@ const TestVelocidad = () => {
         </div>
       </div>
       {results && (
-        <div className="results-container">
-          <h2>Resultados</h2>
-          <iframe
-            className="graph-iframe"
-            title="Speeds Time"
-            srcDoc={results.speeds_time}
-          />
-          <iframe
-            className="graph-iframe"
-            title="Download Histogram"
-            srcDoc={results.download_hist}
-          />
-          <iframe
-            className="graph-iframe"
-            title="Upload Histogram"
-            srcDoc={results.upload_hist}
-          />
-          <iframe
-            className="graph-iframe"
-            title="Average Speeds"
-            srcDoc={results.avg_speeds}
-          />
-          <iframe
-            className="graph-iframe"
-            title="Latency Histogram"
-            srcDoc={results.latency_hist}
-          />
-          <iframe
-            className="graph-iframe"
-            title="Latency Box Plot"
-            srcDoc={results.latency_box}
-          />
-          <iframe
-            className="graph-iframe"
-            title="Max Min Avg Speeds"
-            srcDoc={results.max_min_avg_speeds}
-          />
-          <iframe
-            className="graph-iframe"
-            title="KPIs"
-            srcDoc={results.kpis}
-          />
-        </div>
+        <>
+        <h2>Resultados</h2>
+          <div className="results-container">
+            <iframe
+              className="graph-iframe"
+              title="KPIs"
+              srcDoc={results.kpis}
+            />
+            <iframe
+              className="graph-iframe"
+              title="Speeds Time"
+              srcDoc={results.speeds_time}
+            />
+            <iframe
+              className="graph-iframe"
+              title="Download Histogram"
+              srcDoc={results.download_hist}
+            />
+            <iframe
+              className="graph-iframe"
+              title="Upload Histogram"
+              srcDoc={results.upload_hist}
+            />
+            <iframe
+              className="graph-iframe"
+              title="Average Speeds"
+              srcDoc={results.avg_speeds}
+            />
+            <iframe
+              className="graph-iframe"
+              title="Max Min Avg Speeds"
+              srcDoc={results.max_min_avg_speeds}
+            />
+          </div>
+        </>
       )}
     </>
   );
