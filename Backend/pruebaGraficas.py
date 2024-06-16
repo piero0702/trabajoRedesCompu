@@ -31,6 +31,23 @@ def latencias(count, url):
         return None, "No se pudo obtener latencias."
     return latencias, None
 
+def calculoLatencia(arrayLatencias):
+    latenciaPromedio = sum(arrayLatencias) / len(arrayLatencias)
+    latenciaMayor = max(arrayLatencias)
+    latenciaMenor = min(arrayLatencias)
+    return latenciaPromedio, latenciaMayor, latenciaMenor
+
+def calculoJitterPromedio(arrayLatencias):
+    arrayJittersDifAbs = []
+    
+    for i in range(1, len(arrayLatencias)): 
+        diferenciaAbsoluta = abs(arrayLatencias[i] - arrayLatencias[i - 1])
+        print(diferenciaAbsoluta)
+        arrayJittersDifAbs.append(diferenciaAbsoluta)
+
+    jitterPromedio = sum(arrayJittersDifAbs) / len(arrayJittersDifAbs)
+    return jitterPromedio
+
 @app.route('/api/speedtest', methods=['POST'])
 def run_speedtest():
     data = request.json
@@ -191,7 +208,10 @@ def run_latency ():
     host = data['host']
     
     latencies, error = latencias(num_pings, host)
-    
+
+    latenciaPromedio, latenciaMayor, latenciaMenor = calculoLatencia(latencies)
+    jitterPromedio = calculoJitterPromedio(latencies)
+
     if error:
         return jsonify({"error": error}), 400
 
@@ -213,19 +233,37 @@ def run_latency ():
     fig_kpis.add_trace(go.Indicator(
         mode="number",
         value=avg_latency,
-        title={"text": "Velocidad Promedio de Descarga (Mbps)"},
+        title={"text": "Latencia Promedio"},
         domain={'row': 0, 'column': 0}
     ))
+    fig_kpis.add_trace(go.Indicator(
+        mode="number",
+        value=jitterPromedio,
+        title={"text": "Jitter promedio"},
+        domain={'row': 0, 'column': 1}
+    ))
+    fig_kpis.add_trace(go.Indicator(
+        mode="number",
+        value=latenciaMayor,
+        title={"text": "Latencia Máxima"},
+        domain={'row': 1, 'column': 0}
+    ))
+    fig_kpis.add_trace(go.Indicator(
+        mode="number",
+        value=latenciaMenor,
+        title={"text": "Latencia Mínima"},
+        domain={'row': 1, 'column': 1}
+    ))
     fig_kpis.update_layout(
-        title='Panel de KPIs',
-        grid={'rows': 1, 'columns': 1, 'pattern': "independent"}
+        title='Panel de Latencias',
+        grid={'rows': 2, 'columns': 2, 'pattern': "independent"}
     )
     kpis_html = fig_kpis.to_html(full_html=False)
-    
+
     response = {
         "latencies": latencies,
         "avg_latency": kpis_html,
-        "latency_graph": latency_html
+        "latency_graph": latency_html,
     }
 
     return jsonify(response)
