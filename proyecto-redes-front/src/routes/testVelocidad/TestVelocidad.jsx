@@ -5,7 +5,6 @@ import './testVelocidad.css';
 
 const TestVelocidad = () => {
   const [numTests, setNumTests] = useState(5); // Número predeterminado de pruebas
-  const [url, setUrl] = useState('example.com'); // URL predeterminada
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
 
@@ -13,8 +12,7 @@ const TestVelocidad = () => {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:5000/api/speedtest', {
-        num_tests: parseInt(numTests), // Convertir a número entero
-        url: url.trim() // Asegurar que la URL no tenga espacios innecesarios
+        num_tests: parseInt(numTests) // Convertir a número entero
       });
       console.log('Response data:', response.data); // Añade este log para inspeccionar la respuesta
       setResults(response.data);
@@ -37,13 +35,6 @@ const TestVelocidad = () => {
             placeholder="Número de pruebas a realizar"
             className="input-field"
           />
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="URL para medir latencia"
-            className="input-field"
-          />
           <button className="btn-submit" onClick={handleRunTests} disabled={loading}>
             {loading ? 'Ejecutando pruebas...' : 'Iniciar pruebas'}
           </button>
@@ -51,7 +42,7 @@ const TestVelocidad = () => {
       </div>
       {results && (
         <>
-        <h2>Resultados</h2>
+          <h2>Resultados</h2>
           <div className="results-container">
             <iframe
               className="graph-iframe"
@@ -77,11 +68,6 @@ const TestVelocidad = () => {
               className="graph-iframe"
               title="Average Speeds"
               srcDoc={results.avg_speeds}
-            />
-            <iframe
-              className="graph-iframe"
-              title="Max Min Avg Speeds"
-              srcDoc={results.max_min_avg_speeds}
             />
           </div>
         </>
