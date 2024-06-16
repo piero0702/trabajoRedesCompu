@@ -8,24 +8,26 @@ import time
 import plotly.express as px
 import plotly.graph_objects as go
 from flask_cors import CORS
-app = Flask(__name__)   
+
+app = Flask(__name__)
 CORS(app)
-def latencias(count, url):
+
+def measure_latencies(count, url):
     try:
         target = socket.gethostbyname(url)
     except socket.gaierror:
         return None, "URL no válida o no se pudo resolver la dirección."
-    
-    latencias = []
+
+    latencies = []
     for _ in range(count):
         latencia = ping(target, timeout=2)
         if latencia is not None:
-            latencias.append(latencia * 1000)  # Convertir a milisegundos
+            latencies.append(latencia * 1000)  # Convertir a milisegundos
         time.sleep(1)
-    
-    if not latencias:
+
+    if not latencies:
         return None, "No se pudo obtener latencias."
-    return latencias, None
+    return latencies, None
 
 def calculoLatencia(arrayLatencias):
     latenciaPromedio = sum(arrayLatencias) / len(arrayLatencias)
@@ -49,7 +51,7 @@ def run_speedtest():
     acomulador = 0
     
     # Medir latencias
-    latencias_medidas, error = latencias(num_tests, url)
+    latencias_medidas, error = measure_latencies(num_tests, url)
     if error:
         return jsonify({"error": error}), 400
     if latencias_medidas is None:
@@ -201,7 +203,7 @@ def run_speedtest():
         title='Panel de KPIs',
         grid={'rows': 2, 'columns': 2, 'pattern': "independent"}
     )
-
+    
     # Convertir gráficos a HTML
     download_hist_html = fig_download_hist.to_html(full_html=False)
     upload_hist_html = fig_upload_hist.to_html(full_html=False)
@@ -211,7 +213,7 @@ def run_speedtest():
     latency_box_html = fig_latency_box.to_html(full_html=False)
     max_min_avg_speeds_html = fig_max_min_avg_speeds.to_html(full_html=False)
     kpis_html = fig_kpis.to_html(full_html=False)
-    fig_speeds_time.write_html("figura1.html")
+    
     response = {
         "download_hist": download_hist_html,
         "upload_hist": upload_hist_html,

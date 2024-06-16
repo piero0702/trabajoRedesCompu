@@ -16,6 +16,7 @@ const TestVelocidad = () => {
         num_tests: parseInt(numTests), // Convertir a número entero
         url: url.trim() // Asegurar que la URL no tenga espacios innecesarios
       });
+      console.log('Response data:', response.data); // Añade este log para inspeccionar la respuesta
       setResults(response.data);
     } catch (error) {
       console.error('Error running speed test:', error);
@@ -51,14 +52,46 @@ const TestVelocidad = () => {
       {results && (
         <div className="results-container">
           <h2>Resultados</h2>
-          <div className="graph-container" dangerouslySetInnerHTML={{ __html: results.download_hist }} />
-          <div className="graph-container" dangerouslySetInnerHTML={{ __html: results.upload_hist }} />
-          <div className="graph-container" dangerouslySetInnerHTML={{ __html: results.speeds_time }} />
-          <div className="graph-container" dangerouslySetInnerHTML={{ __html: results.avg_speeds }} />
-          <div className="graph-container" dangerouslySetInnerHTML={{ __html: results.latency_hist }} />
-          <div className="graph-container" dangerouslySetInnerHTML={{ __html: results.latency_box }} />
-          <div className="graph-container" dangerouslySetInnerHTML={{ __html: results.max_min_avg_speeds }} />
-          <div className="graph-container" dangerouslySetInnerHTML={{ __html: results.kpis }} />
+          <iframe
+            className="graph-iframe"
+            title="Speeds Time"
+            srcDoc={results.speeds_time}
+          />
+          <iframe
+            className="graph-iframe"
+            title="Download Histogram"
+            srcDoc={results.download_hist}
+          />
+          <iframe
+            className="graph-iframe"
+            title="Upload Histogram"
+            srcDoc={results.upload_hist}
+          />
+          <iframe
+            className="graph-iframe"
+            title="Average Speeds"
+            srcDoc={results.avg_speeds}
+          />
+          <iframe
+            className="graph-iframe"
+            title="Latency Histogram"
+            srcDoc={results.latency_hist}
+          />
+          <iframe
+            className="graph-iframe"
+            title="Latency Box Plot"
+            srcDoc={results.latency_box}
+          />
+          <iframe
+            className="graph-iframe"
+            title="Max Min Avg Speeds"
+            srcDoc={results.max_min_avg_speeds}
+          />
+          <iframe
+            className="graph-iframe"
+            title="KPIs"
+            srcDoc={results.kpis}
+          />
         </div>
       )}
     </>
