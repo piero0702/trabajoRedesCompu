@@ -69,6 +69,11 @@ const TestVelocidad = () => {
               title="Average Speeds"
               srcDoc={results.avg_speeds}
             />
+            <iframe
+              className="graph-iframe"
+              title="Max Min And Average Speeds"
+              srcDoc={results.max_min_avg_speeds}
+            />
           </div>
         </>
       )}

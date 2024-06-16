@@ -109,13 +109,46 @@ def run_speedtest():
         xaxis_title='Tipo de velocidad',
         yaxis_title='Velocidad (Mbps)'
     )
+    max_download_speed = np.max(download_speeds)
+    min_download_speed = np.min(download_speeds)
+    max_upload_speed = np.max(upload_speeds)
+    min_upload_speed = np.min(upload_speeds)
+    fig_max_min_avg_speeds = go.Figure()
+    fig_max_min_avg_speeds.add_trace(go.Bar(
+        x=['Download Speed', 'Upload Speed'],
+        y=[max_download_speed, max_upload_speed],
+        text=[f'{max_download_speed:.2f} Mbps', f'{max_upload_speed:.2f} Mbps'],
+        textposition='auto',
+        name='Max Speed'
+    ))
+    fig_max_min_avg_speeds.add_trace(go.Bar(
+        x=['Download Speed', 'Upload Speed'],
+        y=[min_download_speed, min_upload_speed],
+        text=[f'{min_download_speed:.2f} Mbps', f'{min_upload_speed:.2f} Mbps'],
+        textposition='auto',
+        name='Min Speed'
+    ))
+    fig_max_min_avg_speeds.add_trace(go.Bar(
+        x=['Download Speed', 'Upload Speed'],
+        y=[avg_download_speed, avg_upload_speed],
+        text=[f'{avg_download_speed:.2f} Mbps', f'{avg_upload_speed:.2f} Mbps'],
+        textposition='auto',
+        name='Avg Speed'
+    ))
+    fig_max_min_avg_speeds.update_layout(
+        title='Velocidades Máxima, Mínima y Promedio de Descarga y Subida',
+        xaxis_title='Tipo de velocidad',
+        yaxis_title='Velocidad (Mbps)',
+        barmode='group'
+    )
+    
     
     # Convertir gráficos a HTML
     download_hist_html = fig_download_hist.to_html(full_html=False)
     upload_hist_html = fig_upload_hist.to_html(full_html=False)
     speeds_time_html = fig_speeds_time.to_html(full_html=False)
     avg_speeds_html = fig_avg_speeds.to_html(full_html=False)
-    
+    max_min_avg_speeds_html = fig_max_min_avg_speeds.to_html(full_html=False)
     response = {
         "download_hist": download_hist_html,
         "upload_hist": upload_hist_html,
@@ -123,7 +156,8 @@ def run_speedtest():
         "avg_speeds": avg_speeds_html,
         "avg_download_speed": avg_download_speed,
         "avg_upload_speed": avg_upload_speed,
-        "kpis": kpis_html
+        "kpis": kpis_html,
+        "max_min_avg_speeds": max_min_avg_speeds_html
     }
 
     return jsonify(response)
