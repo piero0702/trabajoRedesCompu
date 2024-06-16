@@ -5,9 +5,31 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from flask_cors import CORS
+import socket
+from ping3 import ping
+import time
 
 app = Flask(__name__)
 CORS(app)
+
+def latencias(count, url):
+    contadorDeAumentos = 0
+    try: 
+        target = socket.gethostbyname(url)
+    except socket.gaierror:
+        return None, "URL no válida o no se pudo resolver la dirección."
+    
+    latencias = []
+    for _ in range(count):
+        latencia = ping(target, timeout=2)
+        if latencia is not None:
+            contadorDeAumentos += 1
+            latencias.append(round(latencia * 1000, 2))  # Convertir a ms y redondear a 2 decimales
+        time.sleep(1)
+    
+    if not latencias:
+        return None, "No se pudo obtener latencias."
+    return latencias, None
 
 @app.route('/api/speedtest', methods=['POST'])
 def run_speedtest():
@@ -158,6 +180,52 @@ def run_speedtest():
         "avg_upload_speed": avg_upload_speed,
         "kpis": kpis_html,
         "max_min_avg_speeds": max_min_avg_speeds_html
+    }
+
+    return jsonify(response)
+
+@app.route('/api/latency', methods=['POST'])
+def run_latency ():
+    data = request.json
+    num_pings = data['num_pings']
+    host = data['host']
+    
+    latencies, error = latencias(num_pings, host)
+    
+    if error:
+        return jsonify({"error": error}), 400
+
+    avg_latency = np.mean(latencies)
+    
+    # Crear un DataFrame con los resultados
+    df_latency = pd.DataFrame({
+        'Ping Number': list(range(1, len(latencies) + 1)),
+        'Latency (ms)': latencies
+    })
+    
+    # Gráfico de latencias
+    fig_latency = px.line(df_latency, x='Ping Number', y='Latency (ms)', title=f'Latencia para {host}')
+    
+    # Convertir gráficos a HTML
+    latency_html = fig_latency.to_html(full_html=False)
+
+    fig_kpis = go.Figure()
+    fig_kpis.add_trace(go.Indicator(
+        mode="number",
+        value=avg_latency,
+        title={"text": "Velocidad Promedio de Descarga (Mbps)"},
+        domain={'row': 0, 'column': 0}
+    ))
+    fig_kpis.update_layout(
+        title='Panel de KPIs',
+        grid={'rows': 1, 'columns': 1, 'pattern': "independent"}
+    )
+    kpis_html = fig_kpis.to_html(full_html=False)
+    
+    response = {
+        "latencies": latencies,
+        "avg_latency": kpis_html,
+        "latency_graph": latency_html
     }
 
     return jsonify(response)
