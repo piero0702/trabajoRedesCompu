@@ -1,0 +1,31 @@
+.inicial {
+    background-color: #dee8be; 
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #cd8c52; 
+  }
+  
+  .inicial h3 {
+    color: #5e3929; 
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .inicial button {
+    background-color: #b7d1a3; 
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .inicial button:hover {
+    background-color: #fcf7d3;
+  }
+  
+  .inicial button:not(:last-child) {
+    margin-right: 20px;
+  }
