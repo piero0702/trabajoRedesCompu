@@ -51,7 +51,7 @@ const TestLatencias = () => {
       </div>
       {results && (
         <>
-          <h2>Resultados</h2>
+          <h2 className='results'>Resultados</h2>
           <div className="results-container">
             <iframe
               className="graph-iframe"

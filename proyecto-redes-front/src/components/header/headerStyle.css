@@ -1,31 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 .inicial {
-    background-color: #dee8be; 
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #cd8c52; 
-  }
+  font-family: 'Roboto', sans-serif;
+  background-color: #2c2640; /* Morado oscuro */
+  color: #ffffff; /* Blanco para el texto */
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #4d4673; /* Morado más claro para el borde */
+}
+
+.inicial h3 {
+  color: #b19cd9; /* Morado claro para el título */
+  margin: 0;
+  font-weight: bold;
+}
+
+.inicial button {
+  background-color: #6c5b7b; /* Morado medio para el botón */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Roboto', sans-serif;
   
-  .inicial h3 {
-    color: #5e3929; 
-    margin: 0;
-    font-weight: bold;
-  }
-  
-  .inicial button {
-    background-color: #b7d1a3; 
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .inicial button:hover {
-    background-color: #fcf7d3;
-  }
-  
-  .inicial button:not(:last-child) {
-    margin-right: 20px;
-  }
+}
+
+.inicial button:hover {
+  background-color: #a294b9; /* Morado más claro al pasar el mouse */
+}
+
+.inicial button:not(:last-child) {
+  margin-right: 20px;
+}
