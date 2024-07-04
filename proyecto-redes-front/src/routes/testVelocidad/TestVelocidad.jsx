@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../../components/header/Header';
 import './testVelocidad.css';
-
+import { Boxes } from '../../components/ui/background-boxes';
+import { cn } from '../../../util/cn';
 const TestVelocidad = () => {
   const [numTests, setNumTests] = useState(5); // Número predeterminado de pruebas
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,10 @@ const TestVelocidad = () => {
   return (
     <>
       <Header />
-      <div className="test-velocidad">
+      <div className="h-100 relative w-full overflow-hidden bg-slate-900 flex flex-col items-center justify-center rounded-lg">
+      <div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+        <Boxes/>
+      <div className="test-velocidad relative z-20">
         <h1>Test de velocidad</h1>
         <div className="input-container">
           <input
@@ -42,8 +46,8 @@ const TestVelocidad = () => {
       </div>
       {results && (
         <>
-          <h2 className='results'>Resultados</h2>
-          <div className="results-container">
+          <h2 className='results relative z-20'>Resultados</h2>
+          <div className="results-container relative z-20">
             <iframe
               className="graph-iframe"
               title="KPIs"
@@ -77,6 +81,7 @@ const TestVelocidad = () => {
           </div>
         </>
       )}
+      </div>
     </>
   );
 };
