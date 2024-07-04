@@ -75,6 +75,7 @@ const TestLatencias = () => {
                 className="graph-iframe"
                 title="Latency Graph"
                 srcDoc={results.avg_latency}
+                style={{ borderRadius: "8px" }}
               />
               <iframe
                 className="graph-iframe"

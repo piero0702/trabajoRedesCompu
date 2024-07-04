@@ -62,7 +62,7 @@ const TestVelocidad = () => {
             <h2 className='results relative z-20'>Resultados</h2>
             <div className="results-container relative z-20">
               <iframe
-                className="graph-iframe rounded-xl p-10"
+                className="graph-iframe"
                 title="KPIs"
                 srcDoc={results.kpis}
               />
