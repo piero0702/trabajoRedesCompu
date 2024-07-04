@@ -1,0 +1,15 @@
+.results-container {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .results-container iframe {
+    width: 700px; /* ancho del iframe */
+    height: 500px; /* altura del iframe */
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }

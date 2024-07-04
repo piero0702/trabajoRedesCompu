@@ -126,11 +126,11 @@ def run_speedtest():
         mode="number",
         value=avg_upload_speed,
         title={"text": "Velocidad Promedio de Subida (Mbps)"},
-        domain={'row': 0, 'column': 1}
+        domain={'row': 1, 'column': 0}
     ))
     fig_kpis.update_layout(
         title='Panel de KPIs',
-        grid={'rows': 1, 'columns': 2, 'pattern': "independent"}
+        grid={'rows': 2, 'columns': 1, 'pattern': "independent"}
     )
     kpis_html = fig_kpis.to_html(full_html=False)
 
