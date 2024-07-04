@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from '../../components/header/Header';
 import { Boxes } from '../../components/ui/background-boxes';
 import './TestLatencias.css';
-
+import { CardBody, CardContainer, CardItem } from "../../components/ui/3d-card";
 const TestLatencias = () => {
   const [numPings, setNumPings] = useState(5); // Número predeterminado de pings
   const [url, setUrl] = useState('');
@@ -37,30 +37,36 @@ const TestLatencias = () => {
       <div className="h-100 relative w-full overflow-hidden bg-slate-900 flex flex-col items-center justify-center rounded-lg">
         <div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
         <Boxes/>
-        <div className="test-velocidad relative z-20">
-          <h1>Test de Latencias</h1>
-          <div className="input-container">
-            <input
-              type="number"
-              value={numPings}
-              onChange={(e) => setNumPings(e.target.value)}
-              placeholder="Número de pings a realizar"
-              className="input-field"
-              onKeyPress={handleKeyPress}
-            />
-            <input
-              type="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="URL a evaluar"
-              className="input-field"
-              onKeyPress={handleKeyPress}
-            />
-            <button className="btn-submit" onClick={handleRunTests} disabled={loading}>
-              {loading ? 'Ejecutando pruebas...' : 'Iniciar pruebas'}
-            </button>
-          </div>
-        </div>
+        <CardContainer className="inter-var w-full max-w-[800px] mx-auto">
+          <CardBody className="bg-[#2c2640] relative group/card w-full h-auto rounded-xl p-10 border border-gray-300 shadow-lg">
+              <CardItem translateZ="50" className="text-xl font-bold text-[#b19cd9]">
+                <h1>Test de Latencias</h1>
+              </CardItem>
+              <CardItem translateZ="100" className="w-full mt-4">
+                <div className="input-container">
+                  <input
+                    type="number"
+                    value={numPings}
+                    onChange={(e) => setNumPings(e.target.value)}
+                    placeholder="Número de pings a realizar"
+                    className="input-field"
+                    onKeyPress={handleKeyPress}
+                  />
+                  <input
+                    type="url"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    placeholder="URL a evaluar"
+                    className="input-field"
+                    onKeyPress={handleKeyPress}
+                  />
+                  <button className="btn-submit" onClick={handleRunTests} disabled={loading}>
+                    {loading ? 'Ejecutando pruebas...' : 'Iniciar pruebas'}
+                  </button>
+                </div>
+              </CardItem>
+          </CardBody>
+        </CardContainer>
         {results && (
           <>
             <h2 className='results relative z-20'>Resultados</h2>
