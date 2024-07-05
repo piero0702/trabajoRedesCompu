@@ -16,7 +16,11 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customPurple: '#2c2640',
+      },
+    },
   },
   plugins: [addVariablesForColors],
 };

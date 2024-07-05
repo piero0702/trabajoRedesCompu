@@ -4,6 +4,27 @@ import Header from '../../components/header/Header';
 import { Boxes } from '../../components/ui/background-boxes';
 import './testVelocidad.css';
 import { CardBody, CardContainer, CardItem } from "../../components/ui/3d-card";
+import { MultiStepLoader as Loader } from "../../components/ui/multi-step-loader";
+const loadingStates = [
+  {
+    text: "Bueno, este test si demora",
+  },
+  {
+    text: "Recomendaciones para este test:",
+  },
+  {
+    text: "1) Traer un cafesito y un pancito",
+  },
+  {
+    text: "2) Si pusiste mas de 10 pruebas, ponte tu pelicula favorita",
+  },
+  {
+    text: "3) Si fueron menos de 10 podrias ver tik tok.",
+  },
+  {
+    text: "4) Valdra la pena la espera.",
+  }
+];
 const TestVelocidad = () => {
   const [numTests, setNumTests] = useState(5); // Número predeterminado de pruebas
   const [loading, setLoading] = useState(false);
@@ -32,6 +53,7 @@ const TestVelocidad = () => {
   return (
     <>
       <Header />
+      <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
       <div className="h-100 relative w-full overflow-hidden bg-slate-900 flex flex-col items-center justify-center rounded-lg">
         <div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
         <Boxes/>

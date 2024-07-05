@@ -4,6 +4,33 @@ import Header from '../../components/header/Header';
 import { Boxes } from '../../components/ui/background-boxes';
 import './TestLatencias.css';
 import { CardBody, CardContainer, CardItem } from "../../components/ui/3d-card";
+import { MultiStepLoader as Loader } from "../../components/ui/multi-step-loader";
+const loadingStates = [
+  {
+    text: "Tenga paciencia, realizando pings",
+  },
+  {
+    text: "Se esta demorando un toque, aguante",
+  },
+  {
+    text: "Esto esta tomando mas de lo esperado",
+  },
+  {
+    text: "Upsi, ya esta pesado no?",
+  },
+  {
+    text: "Y bueno, que te cuentas?",
+  },
+  {
+    text: "Espero todo bien",
+  },
+  {
+    text: "Bueno",
+  },
+  {
+    text: "Ya demoro mucho, puedes cerrarlo, esto no sirve",
+  },
+];
 const TestLatencias = () => {
   const [numPings, setNumPings] = useState(5); // Número predeterminado de pings
   const [url, setUrl] = useState('');
@@ -34,6 +61,7 @@ const TestLatencias = () => {
   return (
     <>
       <Header />
+      <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
       <div className="h-100 relative w-full overflow-hidden bg-slate-900 flex flex-col items-center justify-center rounded-lg">
         <div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
         <Boxes/>
@@ -60,8 +88,9 @@ const TestLatencias = () => {
                     className="input-field"
                     onKeyPress={handleKeyPress}
                   />
+                  
                   <button className="btn-submit" onClick={handleRunTests} disabled={loading}>
-                    {loading ? 'Ejecutando pruebas...' : 'Iniciar pruebas'}
+                    Iniciar Pruebas
                   </button>
                 </div>
               </CardItem>
