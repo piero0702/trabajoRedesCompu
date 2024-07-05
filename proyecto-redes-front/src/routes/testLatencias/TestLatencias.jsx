@@ -69,8 +69,8 @@ const TestLatencias = () => {
         </CardContainer>
         {results && (
           <>
-            <h2 className='results relative z-20'>Resultados</h2>
-            <div className="results-container relative z-20">
+        <h2 className='results relative z-20 text-4xl font-bold tracking-normal'>Resultados</h2>
+        <div className="results-container relative z-20">
               <iframe
                 className="graph-iframe"
                 title="Latency Graph"

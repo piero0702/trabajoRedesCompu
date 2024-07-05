@@ -21,11 +21,11 @@ export const AnimatedTooltip = ({
   const springConfig = { stiffness: 100, damping: 5 };
   const x = useMotionValue(0);
   const rotate = useSpring(
-    useTransform(x, [-100, 100], [-45, 45]),
+    useTransform(x, [-25, 25], [-15, 15]),
     springConfig
   );
   const translateX = useSpring(
-    useTransform(x, [-100, 100], [-50, 50]),
+    useTransform(x, [-25, 25], [-15, 15]),
     springConfig
   );
 
