@@ -7,28 +7,19 @@ import { CardBody, CardContainer, CardItem } from "../../components/ui/3d-card";
 import { MultiStepLoader as Loader } from "../../components/ui/multi-step-loader";
 const loadingStates = [
   {
-    text: "Tenga paciencia, realizando pings",
+    text: "Realizando pings",
   },
   {
-    text: "Se esta demorando un toque, aguante",
+    text: "Calculando Latencia",
   },
   {
-    text: "Esto esta tomando mas de lo esperado",
+    text: "Por favor, espere",
   },
   {
-    text: "Upsi, ya esta pesado no?",
+    text: "Sólo tomará unos segundos",
   },
   {
-    text: "Y bueno, que te cuentas?",
-  },
-  {
-    text: "Espero todo bien",
-  },
-  {
-    text: "Bueno",
-  },
-  {
-    text: "Ya demoro mucho, puedes cerrarlo, esto no sirve",
+    text: "Cargando resultados",
   },
 ];
 const TestLatencias = () => {

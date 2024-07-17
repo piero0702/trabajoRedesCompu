@@ -7,23 +7,20 @@ import { CardBody, CardContainer, CardItem } from "../../components/ui/3d-card";
 import { MultiStepLoader as Loader } from "../../components/ui/multi-step-loader";
 const loadingStates = [
   {
-    text: "Bueno, este test si demora",
+    text: "Realizando pruebas de Velocidad",
   },
   {
-    text: "Recomendaciones para este test:",
+    text: "Conectando con Speedtest",
   },
   {
-    text: "1) Traer un cafesito y un pancito",
+    text: "Sólo tomará unos minutos",
   },
   {
-    text: "2) Si pusiste mas de 10 pruebas, ponte tu pelicula favorita",
+    text: "Por favor, espere",
   },
   {
-    text: "3) Si fueron menos de 10 podrias ver tik tok.",
+    text: "Cargando resultados",
   },
-  {
-    text: "4) Valdra la pena la espera.",
-  }
 ];
 const TestVelocidad = () => {
   const [numTests, setNumTests] = useState(5); // Número predeterminado de pruebas
